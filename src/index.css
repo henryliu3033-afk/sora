@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+/* ─── SŌRA Design Tokens ─────────────────────────────────── */
+:root {
+  --white:      #FFFFFF;
+  --off-white:  #FAFAFA;
+  --grey-50:    #F5F5F5;
+  --grey-100:   #EBEBEB;
+  --grey-200:   #D6D6D6;
+  --grey-400:   #A0A0A0;
+  --grey-600:   #666666;
+  --ink:        #1A1A1A;
+  --ink-soft:   #3D3D3D;
+  --crimson:    #C41E3A;
+  --crimson-dk: #9E1830;
+  --crimson-lt: #F8E8EB;
+
+  --serif: 'Cormorant Garamond', 'Noto Serif TC', Georgia, serif;
+  --sans:  'DM Sans', 'Noto Serif TC', system-ui, sans-serif;
+
+  --r:    4px;
+  --r-lg: 8px;
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--crimson-lt); color: var(--crimson-dk); }
+
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: var(--grey-50); }
+::-webkit-scrollbar-thumb { background: var(--grey-200); border-radius: 3px; }
+
+/* ─── Container ─────────────────────────────────────────── */
+.wrap {
+  width: 100%;
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+@media(min-width:640px)  { .wrap { padding-left:2rem;   padding-right:2rem;   } }
+@media(min-width:1024px) { .wrap { padding-left:3.5rem; padding-right:3.5rem; } }
+@media(min-width:1280px) { .wrap { padding-left:5rem;   padding-right:5rem;   } }
+
+/* ─── Typography ────────────────────────────────────────── */
+.serif { font-family: var(--serif); }
+.sans  { font-family: var(--sans);  }
+
+/* ─── Divider ───────────────────────────────────────────── */
+.rule {
+  width: 40px;
+  height: 1px;
+  background: var(--crimson);
+  display: block;
+}
+
+/* ─── Page transition ───────────────────────────────────── */
+.page-enter { animation: pgIn .3s ease both; }
+@keyframes pgIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+/* ─── Hover lift ────────────────────────────────────────── */
+.lift { transition: transform .25s ease, box-shadow .25s ease; }
+.lift:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,.08); }
+
+/* ─── Image overlay ─────────────────────────────────────── */
+.img-hover img { transition: transform .6s ease; }
+.img-hover:hover img { transform: scale(1.04); }
+
+/* ─── Dot grid background (replaces ticker) ─────────────── */
+.dot-grid {
+  background-image: radial-gradient(circle, #D6D6D6 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ─── Bleed full image ──────────────────────────────────── */
+.full-bleed { width: 100vw; position: relative; left: 50%; transform: translateX(-50%); }
+
+/* ─── Stats counter strip (replaces ticker) ─────────────── */
+.stat-strip {
+  border-top: 1px solid var(--grey-100);
+  border-bottom: 1px solid var(--grey-100);
+}
+
+/* ─── Stagger animation ─────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up   { animation: fadeUp .6s ease both; }
+.delay-1   { animation-delay: .1s; }
+.delay-2   { animation-delay: .2s; }
+.delay-3   { animation-delay: .3s; }
+.delay-4   { animation-delay: .4s; }
+
+/* ─── Menu card ─────────────────────────────────────────── */
+.menu-item {
+  border-bottom: 1px solid var(--grey-100);
+  transition: background .18s;
+}
+.menu-item:hover { background: var(--grey-50); }
+
+/* ─── Form input ────────────────────────────────────────── */
+.field {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--grey-200);
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  outline: none;
+  transition: border-color .15s;
+  border-radius: var(--r);
+}
+.field:focus   { border-color: var(--crimson); }
+.field::placeholder { color: var(--grey-400); }
+
+/* ─── Floating label wrapper ────────────────────────────── */
+.fl-wrap { position: relative; }
+.fl-wrap label {
+  position: absolute;
+  top: 13px; left: 16px;
+  font-size: 13px;
+  color: var(--grey-400);
+  pointer-events: none;
+  transition: all .15s ease;
+  background: white;
+  padding: 0 4px;
+}
+.fl-wrap input:focus ~ label,
+.fl-wrap input:not(:placeholder-shown) ~ label,
+.fl-wrap select:focus ~ label,
+.fl-wrap select:not([value=""]) ~ label {
+  top: -8px; font-size: 11px; color: var(--crimson);
+}
